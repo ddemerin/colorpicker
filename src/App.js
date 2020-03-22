@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 
+import background from './images/checkered.png'
+
 export class App extends Component {
   state = {
     hue: Math.floor(Math.random() * 360),
     sat: Math.floor(Math.random() * 100),
     light: Math.floor(Math.random() * 100),
+    alpha: 100,
   }
 
   randomAll = e => {
@@ -36,6 +39,13 @@ export class App extends Component {
     console.log(this.state.hue)
   }
 
+  updateAlpha = e => {
+    this.setState({
+      alpha: e.target.value,
+    })
+    console.log(this.state.alpha)
+  }
+
   updateAll = e => {
     this.setState({
       hue: e.target.value,
@@ -52,13 +62,18 @@ export class App extends Component {
             <aside className="color-display">
               <h1>Color</h1>
               <div
-                className="color-box"
-                style={{
-                  backgroundColor: `hsla(${this.state.hue},
+                className="color-box-container"
+                style={{ backgroundImage: `url(${background})` }}
+              >
+                <div
+                  className="color-box"
+                  style={{
+                    backgroundColor: `hsla(${this.state.hue},
                 ${this.state.sat}%,
-                ${this.state.light}%)`,
-                }}
-              ></div>
+                ${this.state.light}%, ${this.state.alpha}%)`,
+                  }}
+                ></div>
+              </div>
               <button
                 onClick={this.randomAll}
                 className="random-button"
